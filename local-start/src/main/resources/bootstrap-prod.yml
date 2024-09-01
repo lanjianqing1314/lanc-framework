@@ -1,0 +1,65 @@
+server:
+  port: 9818
+
+spring:
+  application:
+    name: lanc-framework
+  cache:
+    type: simple
+  redis:
+    database: 1
+    host: 10.7.103.151
+    port: 6376
+    timeout: 100s
+    password: dakewe-pass!
+    lettuce:
+      pool:
+        max-active: 200
+        max-wait: -1ms
+        max-idle: 10
+        min-idle: 0
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  datasource:
+    druid:
+      filters: stat,wall,log4j
+      maxActive: 20
+      initialSize: 10
+      minIdle: 10
+      timeBetweenEvictionRunsMillis: 6000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      maxOpenPreparedStatements: 200
+    dynamic:
+      primary: test
+      datasource:
+        test:
+          url: jdbc:mysql://10.7.103.151:3314/test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
+          username: root
+          password: mYsql_Dkq_8989
+          driverClassName: com.mysql.cj.jdbc.Driver
+  data:
+    mongodb:
+      uri: mongodb://admin:Dkw_gc2023#@10.7.103.151:27017/admin?autoIndexCreation=true
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*Mapper.xml
+  typeAliasesPackage: com.lanc.mysql.ibatis.po
+  check-config-location: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+    auto-mapping-unknown-column-behavior: warning
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: ASSIGN_ID
+      capital-mode: true
+      logic-delete-value: 0
+      logic-not-delete-value: 1
