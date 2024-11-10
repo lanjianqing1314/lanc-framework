@@ -31,7 +31,7 @@
 
     <modules>
         <module>ddd-mongodb</module>
-        <module>ddd-mysql-mybatis</module>
+        <module>ddd-mybatis</module>
         <module>local-app</module>
         <module>local-domain</module>
         <module>local-start</module>

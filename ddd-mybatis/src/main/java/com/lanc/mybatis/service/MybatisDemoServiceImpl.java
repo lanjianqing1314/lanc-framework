@@ -1,9 +1,9 @@
-package com.lanc.mysql.ibatis.service;
+package com.lanc.mybatis.service;
 
 import com.lanc.business.service.MybatisDemoService;
 import com.lanc.domain.po.Demo;
-import com.lanc.mysql.ibatis.mapper.DemoMapper;
-import com.lanc.mysql.ibatis.po.DemoIbatis;
+import com.lanc.mybatis.po.DemoIbatis;
+import com.lanc.mybatis.mapper.DemoMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,10 +16,8 @@ import javax.annotation.Resource;
  */
 @Service
 public class MybatisDemoServiceImpl implements MybatisDemoService {
-
     @Resource
     private DemoMapper demoMapper;
-
     @Override
     public void addTest(Demo demo) {
         DemoIbatis demoIbatis = DemoIbatis.to(demo);

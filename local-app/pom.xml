@@ -25,7 +25,7 @@
         </dependency>
         <dependency>
             <groupId>com.lanc</groupId>
-            <artifactId>ddd-mysql-mybatis</artifactId>
+            <artifactId>ddd-mybatis</artifactId>
             <version>${revision}</version>
         </dependency>
     </dependencies>

@@ -37,17 +37,17 @@ spring:
       primary: test
       datasource:
         test:
-          url: jdbc:mysql://10.7.103.151:3314/test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8&useSSL=false
+          url: jdbc:mysql://localhost:3306/mytest
           username: root
-          password: mYsql_Dkq_8989
+          password: root
           driverClassName: com.mysql.cj.jdbc.Driver
   data:
     mongodb:
-      uri: mongodb://admin:Dkw_gc2023#@10.7.103.151:27017/admin?autoIndexCreation=true
+      uri: mongodb://localhost:27017/admin?autoIndexCreation=true
 
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*Mapper.xml
-  typeAliasesPackage: com.lanc.mysql.ibatis.po
+  typeAliasesPackage: com.lanc.mybatis.po
   check-config-location: true
   configuration:
     map-underscore-to-camel-case: true

@@ -16,6 +16,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableCaching
 public class LancFrameworkApplication {
+
     /**
      * description(描述): 项目执行入口
      * <p>

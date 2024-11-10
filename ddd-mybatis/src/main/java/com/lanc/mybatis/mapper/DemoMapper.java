@@ -1,7 +1,7 @@
-package com.lanc.mysql.ibatis.mapper;
+package com.lanc.mybatis.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lanc.mysql.ibatis.po.DemoIbatis;
+import com.lanc.mybatis.po.DemoIbatis;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

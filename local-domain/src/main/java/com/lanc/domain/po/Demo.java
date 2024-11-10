@@ -20,13 +20,14 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Demo implements Serializable {
+
     private Long id;
-    private String msg;
+    private String name;
 
     public DemoVO toVO(Demo demo) {
         return DemoVO.builder()
                 .id(demo.getId())
-                .msg(demo.getMsg())
+                .name(demo.getName())
                 .build();
     }
 }

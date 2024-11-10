@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = BaseTest.Application.class)
 public abstract class BaseTest {
 
-    @MapperScan(value = "com.lanc.mysql.ibatis.mapper.**", annotationClass = Mapper.class, lazyInitialization = "true")
+    @MapperScan(value = "com.lanc.mybatis.mapper.**", annotationClass = Mapper.class, lazyInitialization = "true")
     @ComponentScan(value = "com.lanc")
     public static class Application {
 

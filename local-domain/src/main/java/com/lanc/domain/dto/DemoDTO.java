@@ -4,6 +4,8 @@ import com.lanc.domain.po.Demo;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * DemoDTO
  *
@@ -13,14 +15,14 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class DemoDTO {
+public class DemoDTO implements Serializable {
     private Long id;
-    private String msg;
+    private String name;
 
     public static Demo toPo(DemoDTO demoDTO) {
         return Demo.builder()
                 .id(demoDTO.getId())
-                .msg(demoDTO.getMsg())
+                .name(demoDTO.getName())
                 .build();
     }
 }

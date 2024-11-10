@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ddd-mysql-mybatis</artifactId>
+    <artifactId>ddd-mybatis</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

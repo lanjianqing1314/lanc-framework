@@ -17,7 +17,6 @@ import javax.annotation.Resource;
  */
 @RestController
 public class DemoController {
-
     @Resource
     private DemoService demoService;
 

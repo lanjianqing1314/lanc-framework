@@ -29,7 +29,7 @@ lanc-framework
 │                          └─service
 │                                  MongoDemoServiceImpl.java
 │                                  
-├─ddd-mysql-mybatis  #DDD防腐层
+├─ddd-mybatis  #DDD防腐层
 │  │  pom.xml
 │  │  
 │  └─src

@@ -16,5 +16,5 @@ import java.io.Serializable;
 @Builder
 public class DemoVO implements Serializable {
     private Long id;
-    private String msg;
+    private String name;
 }

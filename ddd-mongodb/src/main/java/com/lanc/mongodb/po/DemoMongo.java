@@ -23,7 +23,7 @@ public class DemoMongo {
     public static DemoMongo to(Demo demo) {
         return DemoMongo.builder()
                 .id(demo.getId() + "")
-                .msg(demo.getMsg())
+                .msg(demo.getName())
                 .build();
     }
 }
