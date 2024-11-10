@@ -37,16 +37,15 @@ lanc-framework
 │          └─java
 │              └─com
 │                  └─lanc
-│                      └─mysql
-│                          └─ibatis
-│                              ├─mapper
-│                              │      DemoMapper.java
-│                              │      
-│                              ├─po
-│                              │      DemoIbatis.java
-│                              │      
-│                              └─service
-│                                      MybatisDemoServiceImpl.java
+│                      └─mybatis
+│                          ├─mapper
+│                          │  DemoMapper.java
+│                          │      
+│                          ├─po
+│                          │  DemoIbatis.java
+│                          │      
+│                          └─service
+│                             MybatisDemoServiceImpl.java
 │                                      
 ├─local-app  #用户应用层
 │  │  pom.xml
