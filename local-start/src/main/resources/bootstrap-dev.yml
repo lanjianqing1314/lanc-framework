@@ -55,7 +55,7 @@ mybatis-plus:
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
     auto-mapping-unknown-column-behavior: warning
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 使用 SLF4J 打印 SQL
   global-config:
     banner: false
     db-config:
@@ -63,3 +63,10 @@ mybatis-plus:
       capital-mode: true
       logic-delete-value: 0
       logic-not-delete-value: 1
+
+logging:
+  level:
+    # 让 Spring Boot 输出 SQL 日志
+    org.apache.ibatis: DEBUG
+    # SQL 语句执行时间等
+    org.apache.ibatis.jdbc.SQL: TRACE

@@ -122,11 +122,28 @@
         <appender-ref ref="GELF"/>
     </appender>
 
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- MyBatis SQL 日志输出 -->
+    <logger name="org.apache.ibatis" level="DEBUG">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <logger name="org.apache.ibatis.jdbc.SQL" level="TRACE">
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
     <!--系统操作日志-->
     <root level="info">
         <appender-ref ref="file_info" />
         <appender-ref ref="file_error" />
         <appender-ref ref="file_console" />
         <appender-ref ref="ASYNC_GELF" />
+        <appender-ref ref="CONSOLE" />
     </root>
 </configuration>

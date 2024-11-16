@@ -1,6 +1,5 @@
 package com.lanc.mongodb.po;
 
-import com.lanc.domain.po.Demo;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -12,18 +11,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author: lanjianqing
  * @create: 2024-09-01 09:03
  */
-@Document(collection = "demo")
+@Document(collection = "article")
 @Data
 @Builder
-public class DemoMongo {
+public class Article {
     @Id
     private String id;
-    private String msg;
-
-    public static DemoMongo to(Demo demo) {
-        return DemoMongo.builder()
-                .id(demo.getId() + "")
-                .msg(demo.getName())
-                .build();
-    }
+    private String title;
 }

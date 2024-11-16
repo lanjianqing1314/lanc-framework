@@ -1,6 +1,6 @@
 package com.lanc.business.service;
 
-import com.lanc.domain.po.Demo;
+import com.lanc.domain.po.ArticlePO;
 
 /**
  * IMongoDemoService
@@ -8,6 +8,6 @@ import com.lanc.domain.po.Demo;
  * @author: lanjianqing
  * @create: 2024-09-01 08:48
  */
-public interface MongoDemoService {
-    void addTest(Demo demo);
+public interface MongoArticleService {
+    void add(ArticlePO demo);
 }

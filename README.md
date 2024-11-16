@@ -1,55 +1,58 @@
 # 1. 应用架构图
-![DDD分层架构.png](DDD%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84.png)
+![DDD分层架构.png](./local-start/image/DDD%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84.png)
 # 2. 架构目录
 
 ```txt
-lanc-framework
+LANC-FRAMEWORK
 │  .gitignore
-│  DDD分层架构.eddx
-│  DDD分层架构.png
-│  list.txt
 │  pom.xml
-│  reade.md
-│         
-├─ddd-mongodb  #DDD防腐层
+│  README.md
+│
+├─ddd-mongodb
 │  │  pom.xml
-│  │  
+│  │
 │  └─src
 │      └─main
 │          └─java
 │              └─com
 │                  └─lanc
 │                      └─mongodb
+│                          ├─converter
+│                          │      MongoArticleConverter.java
+│                          │
 │                          ├─po
-│                          │      DemoMongo.java
-│                          │      
+│                          │      Article.java
+│                          │
 │                          ├─repository
-│                          │      DemoRepo.java
-│                          │      
+│                          │      ArticleRepo.java
+│                          │
 │                          └─service
-│                                  MongoDemoServiceImpl.java
-│                                  
-├─ddd-mybatis  #DDD防腐层
+│                                  MongoArticleServiceImpl.java
+│
+├─ddd-mybatis
 │  │  pom.xml
-│  │  
+│  │
 │  └─src
 │      └─main
 │          └─java
 │              └─com
 │                  └─lanc
 │                      └─mybatis
+│                          ├─converter
+│                          │      MybatisArticleConverter.java
+│                          │
 │                          ├─mapper
-│                          │  DemoMapper.java
-│                          │      
+│                          │      ArticleMapper.java
+│                          │
 │                          ├─po
-│                          │  DemoIbatis.java
-│                          │      
+│                          │      Article.java
+│                          │
 │                          └─service
-│                             MybatisDemoServiceImpl.java
-│                                      
-├─local-app  #用户应用层
+│                                  MybatisArticleServiceImpl.java
+│
+├─local-app
 │  │  pom.xml
-│  │  
+│  │
 │  └─src
 │      └─main
 │          └─java
@@ -57,20 +60,16 @@ lanc-framework
 │                  └─lanc
 │                      └─app
 │                          ├─controller
-│                          │      DemoController.java
-│                          │      
+│                          │      ArticleController.java
+│                          │
 │                          └─service
-│                              │  DemoServiceImpl.java
-│                              │  
+│                              │  ArticleServiceImpl.java
+│                              │
 │                              └─plus
-│                                  │  DemoServicePlus.java
-│                                  │  
 │                                  └─validated
-│                                          DemoValidated.java
-│                                          
-├─local-domain  #领域层
+├─local-domain
 │  │  pom.xml
-│  │  
+│  │
 │  └─src
 │      └─main
 │          └─java
@@ -80,52 +79,62 @@ lanc-framework
 │                      │  ├─exec
 │                      │  │      DemoEvent.java
 │                      │  │      DemoListener.java
-│                      │  │      
+│                      │  │
 │                      │  └─service
-│                      │          DemoService.java
-│                      │          MongoDemoService.java
-│                      │          MybatisDemoService.java
-│                      │          
+│                      │          ArticleService.java
+│                      │          MongoArticleService.java
+│                      │          MybatisArticleService.java
+│                      │
 │                      └─domain
+│                          ├─converter
+│                          │      ArticleConverter.java
+│                          │
 │                          ├─dos
 │                          │      DemoDO.java
-│                          │      
+│                          │
 │                          ├─dto
-│                          │      DemoDTO.java
-│                          │      
+│                          │      ArticleDTO.java
+│                          │
 │                          ├─po
-│                          │      Demo.java
-│                          │      
+│                          │      ArticlePO.java
+│                          │
 │                          └─vo
-│                                  DemoVO.java
-│                                  
-└─local-start  #用户界面/工程start入口
+│                                  ArticleVO.java
+│
+└─local-start
     │  pom.xml
-    │  
+    │
+    ├─generate
+    │      LancX-0.0.2.zip
+    │
+    ├─image
+    │      DDD分层架构.eddx
+    │      DDD分层架构.png
+    │
     └─src
         ├─main
         │  ├─docker
         │  │  │  cicd.sh
         │  │  │  dev-cicd.sh
         │  │  │  run.sh
-        │  │  │  
+        │  │  │
         │  │  ├─dev
         │  │  │      config.sh
-        │  │  │      
+        │  │  │
         │  │  ├─prod
         │  │  │      config.sh
-        │  │  │      
+        │  │  │
         │  │  ├─sit
         │  │  │      config.sh
-        │  │  │      
+        │  │  │
         │  │  └─uat
         │  │          config.sh
-        │  │          
+        │  │
         │  ├─java
         │  │  └─com
         │  │      └─lanc
         │  │              LancFrameworkApplication.java
-        │  │              
+        │  │
         │  └─resources
         │      │  bootstrap-dev.yml
         │      │  bootstrap-prod.yml
@@ -133,17 +142,19 @@ lanc-framework
         │      │  bootstrap-uat.yml
         │      │  bootstrap.yml
         │      │  logback-spring.xml
-        │      │  
+        │      │
         │      └─mapper
-        │              DemoMapper.xml
-        │              
-        └─test #单元测试
+        │              ArticleMapper.xml
+        │
+        └─test
             ├─java
             │  └─com
             │      └─lanc
-            │              BaseTest.java
-            │              DemoServiceTest.java
-            │              
+            │          │  BaseTest.java
+            │          │
+            │          └─controller
+            │                  ArticleTest.java
+            │
             └─resources
                 └─sql
                         clean.sql
@@ -204,4 +215,7 @@ DDD不是一个什么特殊的架构，而是任何传统代码经过合理的�
 每个拆分出来的模块都符合单一性原则，绝大部分不依赖框架，可以快速的单元测试，做到100%覆盖。
 代码结构清晰：通过POM module可以解决模块间的依赖关系， 所有外接模块都可以单独独立成Jar包被复用。当团队形成规范后，可以快速的定位到相关代码。
 
+## 5. 备注
+通过idea插件LancX-0.0.2.zip可以快速生成代码。
 
+![img.png](local-start/image/img.png)
