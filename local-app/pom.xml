@@ -23,6 +23,7 @@
             <artifactId>ddd-mongodb</artifactId>
             <version>${revision}</version>
         </dependency>
+
         <dependency>
             <groupId>com.lanc</groupId>
             <artifactId>ddd-mybatis</artifactId>

@@ -25,7 +25,7 @@ public class ArticleTest extends BaseTest{
     @Test
     public void testUpdate() {
         ArticleDTO dto = new ArticleDTO();
-        dto.setId(1857814221165096962L);
+        dto.setId(1857972277115052034L);
         dto.setTitle("hollow work!");
         ArticleVO vo = controller.updateById(dto);
         log.info("vo:{}", vo);
@@ -40,7 +40,7 @@ public class ArticleTest extends BaseTest{
 
     @Test
     public void testSelectOne() {
-        ArticleVO vo = controller.selectOne(1857814221165096962L);
+        ArticleVO vo = controller.selectOne(1857972277115052034L);
         log.info("vo:{}", vo);
     }
 }
