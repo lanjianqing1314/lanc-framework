@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="工单提交测试计划" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="全局常量" enabled="true">
+        <collectionProp name="UserParameters.names">
+          <stringProp name="-989163880">protocol</stringProp>
+          <stringProp name="3367">ip</stringProp>
+          <stringProp name="3446913">port</stringProp>
+          <stringProp name="-160088852">contentEncoding</stringProp>
+        </collectionProp>
+        <collectionProp name="UserParameters.thread_values">
+          <collectionProp name="1467378313">
+            <stringProp name="99617003">https</stringProp>
+            <stringProp name="2074592909">sit.lanc.com</stringProp>
+            <stringProp name="51635">443</stringProp>
+            <stringProp name="81070450">UTF-8</stringProp>
+          </collectionProp>
+        </collectionProp>
+        <boolProp name="UserParameters.per_iteration">false</boolProp>
+      </UserParameters>
+      <hashTree/>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="登录接口线程组" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="登记接口" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;userCode&quot;:&quot;test&quot;,&quot;password&quot;:&quot;123456.&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${ip}</stringProp>
+          <stringProp name="HTTPSampler.port">${port}</stringProp>
+          <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">${contentEncoding}</stringProp>
+          <stringProp name="HTTPSampler.path">/api/lanc/test//login</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="接口请求头信息" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="token提取器" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">token</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.data.access_token</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="${token}" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="查看结果树" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell 后置处理器" enabled="true">
+          <boolProp name="resetInterpreter">false</boolProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="script">${__setProperty(globel_token,${token})}</stringProp>
+        </BeanShellPostProcessor>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="工单更改接口线程组" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">100</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="时间选择器" enabled="true">
+          <stringProp name="filename">D:/操作日志压力测试/time.csv</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="variableNames">time</stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="工单更改接口" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+	&quot;id&quot;: &quot;1859182079718244353&quot;,&#xd;
+	&quot;pathologyNumber&quot;: null,&#xd;
+	&quot;relatePathologyNumber&quot;: null,&#xd;
+	&quot;relatePathologyId&quot;: null,&#xd;
+	&quot;patientName&quot;: &quot;陈梓航&quot;,&#xd;
+	&quot;serialNumber&quot;: &quot;202400000557&quot;,&#xd;
+	&quot;sex&quot;: 1,&#xd;
+	&quot;age&quot;: 4,&#xd;
+	&quot;ageUnit&quot;: 3,&#xd;
+	&quot;inspectionItemCode&quot;: &quot;003&quot;,&#xd;
+	&quot;inspectionItemName&quot;: &quot;疑难病例会诊&quot;,&#xd;
+	&quot;outpatientDepartment&quot;: null,&#xd;
+	&quot;hisCode&quot;: &quot;202400000557&quot;,&#xd;
+	&quot;wardNumber&quot;: &quot;101&quot;,&#xd;
+	&quot;roomNumber&quot;: &quot;220&quot;,&#xd;
+	&quot;bedNumber&quot;: &quot;12&quot;,&#xd;
+	&quot;registrantTime&quot;: null,&#xd;
+	&quot;innerRegisteredFlag&quot;: null,&#xd;
+	&quot;workPlanState&quot;: null,&#xd;
+	&quot;createdBy&quot;: null,&#xd;
+	&quot;createdTime&quot;: &quot;${time}&quot;,&#xd;
+	&quot;updatedBy&quot;: &quot;admin&quot;,&#xd;
+	&quot;updatedTime&quot;: &quot;${time}&quot;,&#xd;
+	&quot;deleted&quot;: &quot;0&quot;,&#xd;
+	&quot;createdByCode&quot;: null,&#xd;
+	&quot;updatedByCode&quot;: &quot;dakewe&quot;,&#xd;
+	&quot;library&quot;: 0,&#xd;
+	&quot;libraryCode&quot;: &quot;CG&quot;,&#xd;
+	&quot;libraryName&quot;: &quot;常规&quot;,&#xd;
+	&quot;idNumber&quot;: &quot;452625199112013877&quot;,&#xd;
+	&quot;maritalState&quot;: 0,&#xd;
+	&quot;tel&quot;: &quot;184822333454&quot;,&#xd;
+	&quot;nativePlace&quot;: &quot;中国&quot;,&#xd;
+	&quot;permanentAddress&quot;: &quot;广东省深圳市&quot;,&#xd;
+	&quot;sendDepartment&quot;: &quot;小儿外科住院&quot;,&#xd;
+	&quot;applicationDoctorCode&quot;: null,&#xd;
+	&quot;applicationDoctorName&quot;: null,&#xd;
+	&quot;applicationDoctorTel&quot;: &quot;202400000557&quot;,&#xd;
+	&quot;inspectionDoctorCode&quot;: &quot;1893011&quot;,&#xd;
+	&quot;inspectionDoctorName&quot;: &quot;伊惠鲜&quot;,&#xd;
+	&quot;inspectionTime&quot;: &quot;${time}&quot;,&#xd;
+	&quot;receivePeopleCode&quot;: &quot;dakewe&quot;,&#xd;
+	&quot;receivePeopleName&quot;: &quot;admin&quot;,&#xd;
+	&quot;receiveTime&quot;: &quot;${time}&quot;,&#xd;
+	&quot;patientSource&quot;: 2,&#xd;
+	&quot;doctorOrder&quot;: &quot;医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息医嘱信息&quot;,&#xd;
+	&quot;nonConformityReason&quot;: null,&#xd;
+	&quot;redBloodCell&quot;: &quot;红细胞&quot;,&#xd;
+	&quot;whiteBloodCell&quot;: &quot;白细胞&quot;,&#xd;
+	&quot;platelet&quot;: &quot;血小板&quot;,&#xd;
+	&quot;hemoglobin&quot;: &quot;血红素&quot;,&#xd;
+	&quot;testResultsOther&quot;: &quot;其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它其它&quot;,&#xd;
+	&quot;biochemistry&quot;: &quot;生化&quot;,&#xd;
+	&quot;myelogram&quot;: &quot;骨髓像&quot;,&#xd;
+	&quot;bacterialSerology&quot;: &quot;细菌血清学&quot;,&#xd;
+	&quot;clinicalDiagnosisInfo&quot;: &quot;临床诊断&quot;,&#xd;
+	&quot;originalPathologyNumber&quot;: null,&#xd;
+	&quot;originalPathologicalDiagnosis&quot;: null,&#xd;
+	&quot;specimenNum&quot;: 4,&#xd;
+	&quot;feeType&quot;: 0,&#xd;
+	&quot;fees&quot;: 50,&#xd;
+	&quot;registrationState&quot;: 0,&#xd;
+	&quot;registrantCode&quot;: &quot;dakewe&quot;,&#xd;
+	&quot;registrantName&quot;: &quot;admin&quot;,&#xd;
+	&quot;applicationTime&quot;: &quot;${time}&quot;,&#xd;
+	&quot;firstMenstruation&quot;: &quot;${time}&quot;,&#xd;
+	&quot;menstrualCycle&quot;: &quot;2&quot;,&#xd;
+	&quot;lastMenstruation&quot;: &quot;${time}&quot;,&#xd;
+	&quot;menopause&quot;: 1,&#xd;
+	&quot;menopauseTime&quot;: &quot;${time}&quot;,&#xd;
+	&quot;parity&quot;: &quot;6&quot;,&#xd;
+	&quot;admissionNumber&quot;: &quot;130808&quot;,&#xd;
+	&quot;outpatientNumber&quot;: &quot;130808&quot;,&#xd;
+	&quot;transmitOther&quot;: &quot;申请单的其他申请单的其他申请单的其他申请单的其他申请单的其他&quot;,&#xd;
+	&quot;transmitIllnessList&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;0&quot;],&#xd;
+	&quot;surgicalFindings&quot;: &quot;手术所见&quot;,&#xd;
+	&quot;medicalHistory&quot;: &quot;重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史重要病史&quot;,&#xd;
+	&quot;otherInfo&quot;: null,&#xd;
+	&quot;special&quot;: false,&#xd;
+	&quot;caseNumber&quot;: &quot;202400000557&quot;,&#xd;
+	&quot;physicalExaminationNumber&quot;: &quot;202400000557&quot;,&#xd;
+	&quot;revokeDoctorCode&quot;: null,&#xd;
+	&quot;revokeDoctorName&quot;: null,&#xd;
+	&quot;revokeTime&quot;: null,&#xd;
+	&quot;revokeReason&quot;: null,&#xd;
+	&quot;specimenCondition&quot;: null,&#xd;
+	&quot;endoscopicSurgery&quot;: false,&#xd;
+	&quot;auditDoctorCode&quot;: &quot;210&quot;,&#xd;
+	&quot;subspecialtyType&quot;: null,&#xd;
+	&quot;taskSource&quot;: null,&#xd;
+	&quot;specimenList&quot;: [{&#xd;
+		&quot;id&quot;: &quot;1859441769605808130&quot;,&#xd;
+		&quot;registrationId&quot;: &quot;1859182079718244353&quot;,&#xd;
+		&quot;pathologyNumber&quot;: null,&#xd;
+		&quot;specimenCode&quot;: &quot;20240000055701&quot;,&#xd;
+		&quot;specimenNameId&quot;: null,&#xd;
+		&quot;inspectionDoctorName&quot;: null,&#xd;
+		&quot;inspectionDoctorCode&quot;: null,&#xd;
+		&quot;printState&quot;: null,&#xd;
+		&quot;collatorState&quot;: 1,&#xd;
+		&quot;collatorCode&quot;: null,&#xd;
+		&quot;collatorName&quot;: null,&#xd;
+		&quot;collatorTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;registrationState&quot;: null,&#xd;
+		&quot;registrantCode&quot;: null,&#xd;
+		&quot;registrantName&quot;: null,&#xd;
+		&quot;registrantTime&quot;: null,&#xd;
+		&quot;version&quot;: 0,&#xd;
+		&quot;remark&quot;: &quot;beizhu1&quot;,&#xd;
+		&quot;createdBy&quot;: null,&#xd;
+		&quot;createdTime&quot;: null,&#xd;
+		&quot;updatedBy&quot;: null,&#xd;
+		&quot;updatedTime&quot;: null,&#xd;
+		&quot;deleted&quot;: 0,&#xd;
+		&quot;createdByCode&quot;: null,&#xd;
+		&quot;updatedByCode&quot;: null,&#xd;
+		&quot;collectionPart&quot;: &quot;阑尾&quot;,&#xd;
+		&quot;isolatedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;fixedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;inspectionTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;specimenType&quot;: &quot;1&quot;,&#xd;
+		&quot;oldPathologyNumber&quot;: null,&#xd;
+		&quot;fixedReagent&quot;: 1,&#xd;
+		&quot;fixedLiquidVolume&quot;: null,&#xd;
+		&quot;fixedLiquidUnit&quot;: null,&#xd;
+		&quot;blockNumber&quot;: 2,&#xd;
+		&quot;dataType&quot;: 0,&#xd;
+		&quot;specimenCondition&quot;: 1,&#xd;
+		&quot;nonConformityReason&quot;: null&#xd;
+	}, {&#xd;
+		&quot;id&quot;: &quot;1859441769610002434&quot;,&#xd;
+		&quot;registrationId&quot;: &quot;1859182079718244353&quot;,&#xd;
+		&quot;pathologyNumber&quot;: null,&#xd;
+		&quot;specimenCode&quot;: &quot;20240000055702&quot;,&#xd;
+		&quot;specimenNameId&quot;: null,&#xd;
+		&quot;inspectionDoctorName&quot;: null,&#xd;
+		&quot;inspectionDoctorCode&quot;: null,&#xd;
+		&quot;printState&quot;: null,&#xd;
+		&quot;collatorState&quot;: 1,&#xd;
+		&quot;collatorCode&quot;: null,&#xd;
+		&quot;collatorName&quot;: null,&#xd;
+		&quot;collatorTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;registrationState&quot;: null,&#xd;
+		&quot;registrantCode&quot;: null,&#xd;
+		&quot;registrantName&quot;: null,&#xd;
+		&quot;registrantTime&quot;: null,&#xd;
+		&quot;version&quot;: 0,&#xd;
+		&quot;remark&quot;: &quot;beizhu2&quot;,&#xd;
+		&quot;createdBy&quot;: null,&#xd;
+		&quot;createdTime&quot;: null,&#xd;
+		&quot;updatedBy&quot;: null,&#xd;
+		&quot;updatedTime&quot;: null,&#xd;
+		&quot;deleted&quot;: 0,&#xd;
+		&quot;createdByCode&quot;: null,&#xd;
+		&quot;updatedByCode&quot;: null,&#xd;
+		&quot;collectionPart&quot;: &quot;阑尾&quot;,&#xd;
+		&quot;isolatedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;fixedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;inspectionTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;specimenType&quot;: &quot;2&quot;,&#xd;
+		&quot;oldPathologyNumber&quot;: null,&#xd;
+		&quot;fixedReagent&quot;: 2,&#xd;
+		&quot;fixedLiquidVolume&quot;: null,&#xd;
+		&quot;fixedLiquidUnit&quot;: null,&#xd;
+		&quot;blockNumber&quot;: 1,&#xd;
+		&quot;dataType&quot;: 0,&#xd;
+		&quot;specimenCondition&quot;: 1,&#xd;
+		&quot;nonConformityReason&quot;: null&#xd;
+	}, {&#xd;
+		&quot;id&quot;: &quot;1859441769614196738&quot;,&#xd;
+		&quot;registrationId&quot;: &quot;1859182079718244353&quot;,&#xd;
+		&quot;pathologyNumber&quot;: null,&#xd;
+		&quot;specimenCode&quot;: &quot;20240000055703&quot;,&#xd;
+		&quot;specimenNameId&quot;: null,&#xd;
+		&quot;inspectionDoctorName&quot;: null,&#xd;
+		&quot;inspectionDoctorCode&quot;: null,&#xd;
+		&quot;printState&quot;: null,&#xd;
+		&quot;collatorState&quot;: 1,&#xd;
+		&quot;collatorCode&quot;: null,&#xd;
+		&quot;collatorName&quot;: null,&#xd;
+		&quot;collatorTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;registrationState&quot;: null,&#xd;
+		&quot;registrantCode&quot;: null,&#xd;
+		&quot;registrantName&quot;: null,&#xd;
+		&quot;registrantTime&quot;: null,&#xd;
+		&quot;version&quot;: 0,&#xd;
+		&quot;remark&quot;: &quot;beizhu3&quot;,&#xd;
+		&quot;createdBy&quot;: null,&#xd;
+		&quot;createdTime&quot;: null,&#xd;
+		&quot;updatedBy&quot;: null,&#xd;
+		&quot;updatedTime&quot;: null,&#xd;
+		&quot;deleted&quot;: 0,&#xd;
+		&quot;createdByCode&quot;: null,&#xd;
+		&quot;updatedByCode&quot;: null,&#xd;
+		&quot;collectionPart&quot;: &quot;阑尾&quot;,&#xd;
+		&quot;isolatedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;fixedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;inspectionTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;specimenType&quot;: &quot;2&quot;,&#xd;
+		&quot;oldPathologyNumber&quot;: null,&#xd;
+		&quot;fixedReagent&quot;: 3,&#xd;
+		&quot;fixedLiquidVolume&quot;: null,&#xd;
+		&quot;fixedLiquidUnit&quot;: null,&#xd;
+		&quot;blockNumber&quot;: 4,&#xd;
+		&quot;dataType&quot;: 0,&#xd;
+		&quot;specimenCondition&quot;: 1,&#xd;
+		&quot;nonConformityReason&quot;: null&#xd;
+	}, {&#xd;
+		&quot;id&quot;: &quot;1859441769614196739&quot;,&#xd;
+		&quot;registrationId&quot;: &quot;1859182079718244353&quot;,&#xd;
+		&quot;pathologyNumber&quot;: null,&#xd;
+		&quot;specimenCode&quot;: &quot;20240000055704&quot;,&#xd;
+		&quot;specimenNameId&quot;: null,&#xd;
+		&quot;inspectionDoctorName&quot;: null,&#xd;
+		&quot;inspectionDoctorCode&quot;: null,&#xd;
+		&quot;printState&quot;: null,&#xd;
+		&quot;collatorState&quot;: 1,&#xd;
+		&quot;collatorCode&quot;: null,&#xd;
+		&quot;collatorName&quot;: null,&#xd;
+		&quot;collatorTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;registrationState&quot;: null,&#xd;
+		&quot;registrantCode&quot;: null,&#xd;
+		&quot;registrantName&quot;: null,&#xd;
+		&quot;registrantTime&quot;: null,&#xd;
+		&quot;version&quot;: 0,&#xd;
+		&quot;remark&quot;: &quot;beizhu4&quot;,&#xd;
+		&quot;createdBy&quot;: null,&#xd;
+		&quot;createdTime&quot;: null,&#xd;
+		&quot;updatedBy&quot;: null,&#xd;
+		&quot;updatedTime&quot;: null,&#xd;
+		&quot;deleted&quot;: 0,&#xd;
+		&quot;createdByCode&quot;: null,&#xd;
+		&quot;updatedByCode&quot;: null,&#xd;
+		&quot;collectionPart&quot;: &quot;阑尾&quot;,&#xd;
+		&quot;isolatedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;fixedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;inspectionTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;specimenType&quot;: &quot;2&quot;,&#xd;
+		&quot;oldPathologyNumber&quot;: null,&#xd;
+		&quot;fixedReagent&quot;: 4,&#xd;
+		&quot;fixedLiquidVolume&quot;: null,&#xd;
+		&quot;fixedLiquidUnit&quot;: null,&#xd;
+		&quot;blockNumber&quot;: 3,&#xd;
+		&quot;dataType&quot;: 0,&#xd;
+		&quot;specimenCondition&quot;: 1,&#xd;
+		&quot;nonConformityReason&quot;: null&#xd;
+	}],&#xd;
+	&quot;sendUnitId&quot;: &quot;332&quot;,&#xd;
+	&quot;originalSendUnitId&quot;: &quot;102&quot;,&#xd;
+	&quot;sendDepartmentId&quot;: &quot;334&quot;,&#xd;
+	&quot;xray&quot;: &quot;X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光X光&quot;,&#xd;
+	&quot;ct&quot;: &quot;CTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCTCT&quot;,&#xd;
+	&quot;bscan&quot;: &quot;B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超B超&quot;,&#xd;
+	&quot;list&quot;: [{&#xd;
+		&quot;id&quot;: &quot;1859441769605808130&quot;,&#xd;
+		&quot;registrationId&quot;: &quot;1859182079718244353&quot;,&#xd;
+		&quot;pathologyNumber&quot;: null,&#xd;
+		&quot;specimenCode&quot;: &quot;20240000055701&quot;,&#xd;
+		&quot;specimenName&quot;: &quot;Specimen_490796&quot;,&#xd;
+		&quot;specimenNameId&quot;: null,&#xd;
+		&quot;inspectionDoctorName&quot;: null,&#xd;
+		&quot;inspectionDoctorCode&quot;: null,&#xd;
+		&quot;printState&quot;: null,&#xd;
+		&quot;collatorState&quot;: 1,&#xd;
+		&quot;collatorCode&quot;: null,&#xd;
+		&quot;collatorName&quot;: null,&#xd;
+		&quot;collatorTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;registrationState&quot;: null,&#xd;
+		&quot;registrantCode&quot;: null,&#xd;
+		&quot;registrantName&quot;: null,&#xd;
+		&quot;registrantTime&quot;: null,&#xd;
+		&quot;version&quot;: 0,&#xd;
+		&quot;remark&quot;: &quot;beizhu1&quot;,&#xd;
+		&quot;createdBy&quot;: null,&#xd;
+		&quot;createdTime&quot;: null,&#xd;
+		&quot;updatedBy&quot;: null,&#xd;
+		&quot;updatedTime&quot;: null,&#xd;
+		&quot;deleted&quot;: 0,&#xd;
+		&quot;createdByCode&quot;: null,&#xd;
+		&quot;updatedByCode&quot;: null,&#xd;
+		&quot;collectionPart&quot;: &quot;阑尾&quot;,&#xd;
+		&quot;isolatedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;fixedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;inspectionTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;specimenType&quot;: &quot;1&quot;,&#xd;
+		&quot;oldPathologyNumber&quot;: null,&#xd;
+		&quot;fixedReagent&quot;: 1,&#xd;
+		&quot;fixedLiquidVolume&quot;: null,&#xd;
+		&quot;fixedLiquidUnit&quot;: null,&#xd;
+		&quot;blockNumber&quot;: 2,&#xd;
+		&quot;dataType&quot;: 0,&#xd;
+		&quot;specimenCondition&quot;: 1,&#xd;
+		&quot;nonConformityReason&quot;: null&#xd;
+	}, {&#xd;
+		&quot;id&quot;: &quot;1859441769610002434&quot;,&#xd;
+		&quot;registrationId&quot;: &quot;1859182079718244353&quot;,&#xd;
+		&quot;pathologyNumber&quot;: null,&#xd;
+		&quot;specimenCode&quot;: &quot;20240000055702&quot;,&#xd;
+		&quot;specimenName&quot;: &quot;Specimen_490796&quot;,&#xd;
+		&quot;specimenNameId&quot;: null,&#xd;
+		&quot;inspectionDoctorName&quot;: null,&#xd;
+		&quot;inspectionDoctorCode&quot;: null,&#xd;
+		&quot;printState&quot;: null,&#xd;
+		&quot;collatorState&quot;: 1,&#xd;
+		&quot;collatorCode&quot;: null,&#xd;
+		&quot;collatorName&quot;: null,&#xd;
+		&quot;collatorTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;registrationState&quot;: null,&#xd;
+		&quot;registrantCode&quot;: null,&#xd;
+		&quot;registrantName&quot;: null,&#xd;
+		&quot;registrantTime&quot;: null,&#xd;
+		&quot;version&quot;: 0,&#xd;
+		&quot;remark&quot;: &quot;beizhu2&quot;,&#xd;
+		&quot;createdBy&quot;: null,&#xd;
+		&quot;createdTime&quot;: null,&#xd;
+		&quot;updatedBy&quot;: null,&#xd;
+		&quot;updatedTime&quot;: null,&#xd;
+		&quot;deleted&quot;: 0,&#xd;
+		&quot;createdByCode&quot;: null,&#xd;
+		&quot;updatedByCode&quot;: null,&#xd;
+		&quot;collectionPart&quot;: &quot;阑尾&quot;,&#xd;
+		&quot;isolatedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;fixedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;inspectionTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;specimenType&quot;: &quot;2&quot;,&#xd;
+		&quot;oldPathologyNumber&quot;: null,&#xd;
+		&quot;fixedReagent&quot;: 2,&#xd;
+		&quot;fixedLiquidVolume&quot;: null,&#xd;
+		&quot;fixedLiquidUnit&quot;: null,&#xd;
+		&quot;blockNumber&quot;: 1,&#xd;
+		&quot;dataType&quot;: 0,&#xd;
+		&quot;specimenCondition&quot;: 1,&#xd;
+		&quot;nonConformityReason&quot;: null&#xd;
+	}, {&#xd;
+		&quot;id&quot;: &quot;1859441769614196738&quot;,&#xd;
+		&quot;registrationId&quot;: &quot;1859182079718244353&quot;,&#xd;
+		&quot;pathologyNumber&quot;: null,&#xd;
+		&quot;specimenCode&quot;: &quot;20240000055703&quot;,&#xd;
+		&quot;specimenName&quot;: &quot;Specimen_490796&quot;,&#xd;
+		&quot;specimenNameId&quot;: null,&#xd;
+		&quot;inspectionDoctorName&quot;: null,&#xd;
+		&quot;inspectionDoctorCode&quot;: null,&#xd;
+		&quot;printState&quot;: null,&#xd;
+		&quot;collatorState&quot;: 1,&#xd;
+		&quot;collatorCode&quot;: null,&#xd;
+		&quot;collatorName&quot;: null,&#xd;
+		&quot;collatorTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;registrationState&quot;: null,&#xd;
+		&quot;registrantCode&quot;: null,&#xd;
+		&quot;registrantName&quot;: null,&#xd;
+		&quot;registrantTime&quot;: null,&#xd;
+		&quot;version&quot;: 0,&#xd;
+		&quot;remark&quot;: &quot;beizhu3&quot;,&#xd;
+		&quot;createdBy&quot;: null,&#xd;
+		&quot;createdTime&quot;: null,&#xd;
+		&quot;updatedBy&quot;: null,&#xd;
+		&quot;updatedTime&quot;: null,&#xd;
+		&quot;deleted&quot;: 0,&#xd;
+		&quot;createdByCode&quot;: null,&#xd;
+		&quot;updatedByCode&quot;: null,&#xd;
+		&quot;collectionPart&quot;: &quot;阑尾&quot;,&#xd;
+		&quot;isolatedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;fixedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;inspectionTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;specimenType&quot;: &quot;2&quot;,&#xd;
+		&quot;oldPathologyNumber&quot;: null,&#xd;
+		&quot;fixedReagent&quot;: 3,&#xd;
+		&quot;fixedLiquidVolume&quot;: null,&#xd;
+		&quot;fixedLiquidUnit&quot;: null,&#xd;
+		&quot;blockNumber&quot;: 4,&#xd;
+		&quot;dataType&quot;: 0,&#xd;
+		&quot;specimenCondition&quot;: 1,&#xd;
+		&quot;nonConformityReason&quot;: null&#xd;
+	}, {&#xd;
+		&quot;id&quot;: &quot;1859441769614196739&quot;,&#xd;
+		&quot;registrationId&quot;: &quot;1859182079718244353&quot;,&#xd;
+		&quot;pathologyNumber&quot;: null,&#xd;
+		&quot;specimenCode&quot;: &quot;20240000055704&quot;,&#xd;
+		&quot;specimenName&quot;: &quot;Specimen_490796&quot;,&#xd;
+		&quot;specimenNameId&quot;: null,&#xd;
+		&quot;inspectionDoctorName&quot;: null,&#xd;
+		&quot;inspectionDoctorCode&quot;: null,&#xd;
+		&quot;printState&quot;: null,&#xd;
+		&quot;collatorState&quot;: 1,&#xd;
+		&quot;collatorCode&quot;: null,&#xd;
+		&quot;collatorName&quot;: null,&#xd;
+		&quot;collatorTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;registrationState&quot;: null,&#xd;
+		&quot;registrantCode&quot;: null,&#xd;
+		&quot;registrantName&quot;: null,&#xd;
+		&quot;registrantTime&quot;: null,&#xd;
+		&quot;version&quot;: 0,&#xd;
+		&quot;remark&quot;: &quot;beizhu4&quot;,&#xd;
+		&quot;createdBy&quot;: null,&#xd;
+		&quot;createdTime&quot;: null,&#xd;
+		&quot;updatedBy&quot;: null,&#xd;
+		&quot;updatedTime&quot;: null,&#xd;
+		&quot;deleted&quot;: 0,&#xd;
+		&quot;createdByCode&quot;: null,&#xd;
+		&quot;updatedByCode&quot;: null,&#xd;
+		&quot;collectionPart&quot;: &quot;阑尾&quot;,&#xd;
+		&quot;isolatedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;fixedTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;inspectionTime&quot;: &quot;${time}&quot;,&#xd;
+		&quot;specimenType&quot;: &quot;2&quot;,&#xd;
+		&quot;oldPathologyNumber&quot;: null,&#xd;
+		&quot;fixedReagent&quot;: 4,&#xd;
+		&quot;fixedLiquidVolume&quot;: null,&#xd;
+		&quot;fixedLiquidUnit&quot;: null,&#xd;
+		&quot;blockNumber&quot;: 3,&#xd;
+		&quot;dataType&quot;: 0,&#xd;
+		&quot;specimenCondition&quot;: 1,&#xd;
+		&quot;nonConformityReason&quot;: null&#xd;
+	}]&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${ip}</stringProp>
+          <stringProp name="HTTPSampler.port">${port}</stringProp>
+          <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">${contentEncoding}</stringProp>
+          <stringProp name="HTTPSampler.path">/api/lanc/test/saveRegistration</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="接口请求头信息" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${__property(globel_token)}</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Cookie</stringProp>
+                <stringProp name="Header.value">Admin-Token=${__property(globel_token)}; Admin-Expires-In=720</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Lang</stringProp>
+                <stringProp name="Header.value">zh-CN</stringProp>
+              </elementProp>
+              <elementProp name="accept" elementType="Header">
+                <stringProp name="Header.name">Accept</stringProp>
+                <stringProp name="Header.value">application/json, text/plain, */*</stringProp>
+              </elementProp>
+              <elementProp name="accept-encoding" elementType="Header">
+                <stringProp name="Header.name">Accept-encoding</stringProp>
+                <stringProp name="Header.value">gzip, deflate, br, zstd</stringProp>
+              </elementProp>
+              <elementProp name="accept-language" elementType="Header">
+                <stringProp name="Header.name">Accept-language</stringProp>
+                <stringProp name="Header.value">zh-CN,zh;q=0.9</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Encoding</stringProp>
+                <stringProp name="Header.value">UTF-8</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="查看结果树" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="报告汇总" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="${__property(globel_token)}" enabled="true">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+        <SyncTimer guiclass="TestBeanGUI" testclass="SyncTimer" testname="Synchronizing Timer" enabled="true">
+          <intProp name="groupSize">100</intProp>
+          <longProp name="timeoutInMs">0</longProp>
+        </SyncTimer>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
