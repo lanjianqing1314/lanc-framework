@@ -29,5 +29,10 @@
             <artifactId>ddd-mybatis</artifactId>
             <version>${revision}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.feiniaojin</groupId>
+            <artifactId>graceful-response</artifactId>
+        </dependency>
     </dependencies>
 </project>

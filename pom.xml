@@ -15,12 +15,12 @@
     <artifactId>lanc-framework</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
-    <description>lanc架构v1.1.0</description>
+    <description>lanc架构</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <revision>1.0.0</revision>
+        <revision>1.1.0</revision>
         <dynamic.datasource.boot.version>2.5.4</dynamic.datasource.boot.version>
         <mybatisplus.boot.version>3.5.9</mybatisplus.boot.version>
         <druid.version>1.1.10</druid.version>
@@ -32,6 +32,7 @@
         <junit.version>4.13.2</junit.version>
         <lombok.version>1.18.36</lombok.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <graceful-response.version>5.0.3-boot2</graceful-response.version>
     </properties>
 
     <modules>
@@ -122,6 +123,12 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.feiniaojin</groupId>
+                <artifactId>graceful-response</artifactId>
+                <version>${graceful-response.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -33,6 +33,8 @@ spring:
       testOnBorrow: false
       testOnReturn: false
       maxOpenPreparedStatements: 200
+      web-stat-filter:
+        enabled: false
     dynamic:
       primary: test
       datasource:

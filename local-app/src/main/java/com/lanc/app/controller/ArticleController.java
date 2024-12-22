@@ -74,7 +74,7 @@ public class ArticleController {
      * @param id id
      * @return ArticleVO
      */
-    @GetMapping("/article/selectOne/{id}")
+        @GetMapping("/article/selectOne/{id}")
     public ArticleVO selectOne(@PathVariable Serializable id) {
         return service.selectOne(id);
     }
