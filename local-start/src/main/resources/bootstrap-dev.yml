@@ -8,16 +8,16 @@ spring:
     type: simple
   redis:
     database: 1
-    host: 10.7.103.151
-    port: 6376
-    timeout: 100s
+    host: 119.3.237.172
+    port: 6385
+    timeout: 5000ms # 修改为5秒，避免超时过长
     password: dakewe-pass!
     lettuce:
       pool:
         max-active: 200
-        max-wait: -1ms
-        max-idle: 10
-        min-idle: 0
+        max-wait: 5000ms # 修改为 5秒（5000ms），避免连接池阻塞
+        max-idle: 50     # 提高空闲连接的最大值
+        min-idle: 10     # 增加最小空闲连接数
   autoconfigure:
     exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
   datasource:
@@ -41,9 +41,10 @@ spring:
           username: root
           password: root
           driverClassName: com.mysql.cj.jdbc.Driver
+#spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/admin?autoIndexCreation=true
+      uri: mongodb://119.3.237.172:27017,119.3.237.172:27018,119.3.237.172:27019/myDatabase?replicaSet=rs0&autoIndexCreation=true&maxPoolSize=100&minPoolSize=10&maxIdleTimeMS=300000
 
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*Mapper.xml

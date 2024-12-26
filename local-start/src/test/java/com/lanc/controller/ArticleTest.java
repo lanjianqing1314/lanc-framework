@@ -18,6 +18,7 @@ public class ArticleTest extends BaseTest{
     @Test
     public void testAdd() {
         ArticleDTO dto = new ArticleDTO();
+        dto.setTitle("你好！世界！");
         ArticleVO vo = controller.add(dto);
         log.info("vo:{}", vo);
     }
