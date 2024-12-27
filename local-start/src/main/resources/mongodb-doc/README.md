@@ -1,10 +1,27 @@
 ```shell
+# 删除容器和卷
 docker-compose down
 docker volume prune
 docker volume rm root_mongo1-data root_mongo2-data root_mongo3-data
+
+# 创建目录
 mkdir mongo
 cd mongo/
 vim docker-compose.yml
+
+# 创建log和data目录
+mkdir -p /root/mongo/mongo1-logs
+mkdir -p /root/mongo/mongo1-data
+mkdir -p /root/mongo/mongo2-logs
+mkdir -p /root/mongo/mongo2-data
+mkdir -p /root/mongo/mongo3-logs
+mkdir -p /root/mongo/mongo3-data
+chmod +x /root/mongo/mongo1-logs
+chmod +x /root/mongo/mongo1-data
+chmod +x /root/mongo/mongo2-logs
+chmod +x /root/mongo/mongo2-data
+chmod +x /root/mongo/mongo3-logs
+chmod +x /root/mongo/mongo3-data
 ```
 
 docker-compose.yml
@@ -65,29 +82,62 @@ services:
 
 volumes:
   mongo1-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /root/mongo/mongo1-data
   mongo1-logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /root/mongo/mongo1-logs
   mongo2-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /root/mongo/mongo2-data
   mongo2-logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /root/mongo/mongo2-logs
   mongo3-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /root/mongo/mongo3-data
   mongo3-logs:
-
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /root/mongo/mongo3-logs
 
 ```
 
 ```shell
+# 启动容器
 docker-compose up -d
 
+# 进入容器
 docker exec -it mongo1 mongosh
 
+# 初始化副本集
 rs.initiate({
     _id: "rs0",
     members: [
-        { _id: 0, host: "119.3.237.172:27017" },
-        { _id: 1, host: "119.3.237.172:27018" },
-        { _id: 2, host: "119.3.237.172:27019" }
+        { _id: 0, host: "lanc.com:27017" },
+        { _id: 1, host: "lanc.com:27018" },
+        { _id: 2, host: "lanc.com:27019" }
     ]
 })
 
+# 查看副本集状态
 rs.status()
 ```
 
@@ -97,3 +147,7 @@ rs.status()
 注意，同一个clientId同时连接会被覆盖
 ![img_2.png](img_2.png)
 ![img_3.png](img_3.png)
+多个节点测试
+![img_4.png](img_4.png)
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)

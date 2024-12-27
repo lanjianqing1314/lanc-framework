@@ -1,5 +1,22 @@
 server:
-  port: 9818
+  port: 9819
+
+redisson:
+  # 单机配置
+  single:
+    address: redis://lanc.com:6385
+    password: dakewe-pass!
+    database: 0
+    enabled: true
+  # 集群配置（示例）
+  cluster:
+    addresses:
+      - redis://lanc.com:6379
+      - redis://lanc.com:6389
+      - redis://lanc.com:6399
+    password: dakewe-pass!
+    enabled: false
+    pingConnectionInterval: 32000
 
 spring:
   application:
@@ -8,7 +25,7 @@ spring:
     type: simple
   redis:
     database: 1
-    host: 119.3.237.172
+    host: lanc.com
     port: 6385
     timeout: 5000ms # 修改为5秒，避免超时过长
     password: dakewe-pass!
@@ -41,10 +58,10 @@ spring:
           username: root
           password: root
           driverClassName: com.mysql.cj.jdbc.Driver
-#spring:
+  #spring:
   data:
     mongodb:
-      uri: mongodb://119.3.237.172:27017,119.3.237.172:27018,119.3.237.172:27019/myDatabase?replicaSet=rs0&autoIndexCreation=true&maxPoolSize=100&minPoolSize=10&maxIdleTimeMS=300000
+      uri: mongodb://lanc.com:27017,lanc.com:27018,lanc.com:27019/myDatabase?replicaSet=rs0&autoIndexCreation=true&maxPoolSize=100&minPoolSize=10&maxIdleTimeMS=300000
 
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*Mapper.xml
